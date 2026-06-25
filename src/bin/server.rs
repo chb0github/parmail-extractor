@@ -11,8 +11,7 @@ use std::sync::Arc;
 use tracing::{error, info};
 use uuid::Uuid;
 
-mod storage;
-use storage::{InMemoryStore, ManifestStore};
+use extractor::storage::{InMemoryStore, ManifestStore};
 
 /// Server state
 #[derive(Clone)]

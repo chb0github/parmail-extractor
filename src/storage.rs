@@ -52,6 +52,12 @@ impl InMemoryStore {
     }
 }
 
+impl Default for InMemoryStore {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 #[async_trait]
 impl ManifestStore for InMemoryStore {
     async fn save(
@@ -84,7 +90,7 @@ impl ManifestStore for InMemoryStore {
                     .ok()
                     .and_then(|v| v.get("mail_pieces").and_then(|p| p.as_array()).map(|a| a.len()))
                     .unwrap_or(0);
-
+                
                 results.push(ManifestMetadata {
                     job_id,
                     user_id: user_id.to_string(),
@@ -102,30 +108,4 @@ impl ManifestStore for InMemoryStore {
         data.remove(&key);
         Ok(())
     }
-}
-
-// ============================================================================
-// Webservice Job Storage Backend (for API jobs)
-// ============================================================================
-
-use async_trait::async_trait;
-use crate::models::{JobResult, JobStatus};
-
-/// Storage abstraction for job state and results
-#[async_trait]
-pub trait JobStorageBackend: Send + Sync {
-    /// Create or update a job record
-    async fn save_job(&self, job_id: &str, result: &JobResult) -> anyhow::Result<()>;
-
-    /// Retrieve a job record by ID
-    async fn get_job(&self, job_id: &str) -> anyhow::Result<Option<JobResult>>;
-
-    /// Store extracted manifest JSON
-    async fn save_manifest(&self, job_id: &str, manifest: serde_json::Value) -> anyhow::Result<()>;
-
-    /// Store extracted images (mailer.jpg, content.jpg, etc.)
-    async fn save_image(&self, job_id: &str, piece_id: &str, image_type: &str, data: bytes::Bytes) -> anyhow::Result<()>;
-
-    /// Retrieve image data
-    async fn get_image(&self, job_id: &str, piece_id: &str, image_type: &str) -> anyhow::Result<Option<bytes::Bytes>>;
 }
