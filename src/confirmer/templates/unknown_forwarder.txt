@@ -1,0 +1,12 @@
+Hi,
+
+We received an email forwarded from {forwarder} to our mail scanning service at parmail.thetaone.io, but this address is not yet confirmed.
+
+To enable processing of your forwarded mail, you need to set up forwarding through your email provider (Gmail, Outlook, etc.) to usps@parmail.thetaone.io. Your provider will send a confirmation email that authorizes the connection.
+
+Until you complete that step, all emails forwarded from {forwarder} will be silently dropped.
+
+If you didn't forward anything to us, you can safely ignore this message.
+
+— Parmail Service
+https://parmail.thetaone.io

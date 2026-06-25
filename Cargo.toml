@@ -1,0 +1,36 @@
+[package]
+name = "extractor"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "extractor"
+path = "src/bin/server.rs"
+
+[dependencies]
+anyhow = "1"
+backon = "1"
+aws-config = { version = "1", features = ["behavior-version-latest"] }
+aws-sdk-s3 = "1"
+aws-sdk-bedrockruntime = "1"
+aws-smithy-types = "1"
+base64 = "0.22"
+chrono = { version = "0.4", features = ["serde"] }
+mail-parser = "0.9"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+xxhash-rust = { version = "0.8", features = ["xxh3"] }
+regex = "1"
+tokio = { version = "1", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "json"] }
+uuid = { version = "1", features = ["v4", "serde"] }
+axum = "0.7"
+tower = "0.4"
+tower-http = { version = "0.5", features = ["trace", "cors"] }
+hyper = "1"
+http = "1"
+async-trait = "0.1"
+
+[dev-dependencies]
+tempfile = "3"
